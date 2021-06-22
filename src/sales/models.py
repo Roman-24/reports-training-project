@@ -6,6 +6,8 @@ from django.utils.translation import activate
 from products.models import Product
 from customers.models import Customer
 from profiles.models import Profile
+from sales.utils import generate_code
+from .utils import generate_code
 
 # Create your models here.
 
@@ -37,7 +39,7 @@ class Sale(models.Model):
     def save(self, *args, **kwargs):
 
         if self.transaction_id == "":
-            self.transaction_id = ''
+            self.transaction_id = generate_code()
         
         if self.created in None:
             self.created = timezone.now()
