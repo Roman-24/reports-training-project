@@ -15,3 +15,10 @@ class SaleDeatailView(DetailView):
     model = Sale
     template_name = 'sales/detail.html'
 
+def sale_list_view(request):
+    qs = Sale.objects.all()
+    return render(request, 'sales/main.html', {'obkect_list': qs})
+
+def sale_detail_view(request, pk):
+    obj = Sale.objects.get(pk=pk)
+    return render(request, 'sales/main.html', {'object': obj})
