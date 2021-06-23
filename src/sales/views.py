@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
+import pandas as pd
 
 from .models import Sale
 from .forms import SalesSearchForm
@@ -14,6 +15,12 @@ def home_view(request):
         chart_type = request.POST.get('chart_type')
 
         print(date_from, date_to, chart_type)
+
+    qs = Sale.objects.all()
+    obj = Sale.objects.get(id=1)
+
+    df1 = pd.DataFrame(qs.values())
+    df2 = pd.DataFrame(qs.values_list())
 
     context = {
         'form': form,
